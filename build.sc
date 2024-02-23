@@ -10,10 +10,11 @@ import $file.tests
 object v {
   val pluginScalaCrossVersions = Seq(
     "2.13.11",
-    "2.13.12"
+    "2.13.12",
+    "2.13.13"
   )
   val scalaCrossVersions = Seq(
-    "2.13.12"
+    "2.13.13"
   )
   val osLib = ivy"com.lihaoyi::os-lib:0.9.1"
   val upickle = ivy"com.lihaoyi::upickle:3.1.0"
