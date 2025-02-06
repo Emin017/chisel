@@ -117,6 +117,10 @@ def prepareOfflineAllUnits() = Task.Command {
   Task.sequence(v.buildUnits().map(m => m.prepareOffline(mainargs.Flag()))).map(_ => ())()
 }
 
+def scalaCompilerClasspathAllUnits() = Task.Command {
+  Task.sequence(v.buildUnits().map(m => m.scalaCompilerClasspath)).map(_ => ())()
+}
+
 trait HasScala2MacroAnno extends CrossModuleBase {
   override def scalacOptions = Task {
     if (!v.isScala3(crossScalaVersion)) {
