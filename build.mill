@@ -272,6 +272,8 @@ trait Chisel extends CrossSbtModule with HasScala2MacroAnno with HasScala2Plugin
   def coreModule = core.cross(crossScalaVersion)
   def pluginModule = plugin.cross()
 
+  override def javadocOptions = Task(super.javadocOptions() ++ Seq("--date", "1970-01-01T00:00:00.000Z"))
+
   override def scalacOptions = Task {
     if (v.isScala3(crossScalaVersion)) {
       Seq.empty[String]
