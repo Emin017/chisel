@@ -136,7 +136,7 @@ object CLI {
               throw new IllegalArgumentException(
                 s"""invalid argument '$value' for option 'enableVcdSupport', must be one of ${trueValue
                     .mkString("[", ", ", "]")}"""
-              )
+              ) with NoStackTrace
           }
         },
         updateCommonSettings = (_, options) => {
