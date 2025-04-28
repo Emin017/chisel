@@ -26,4 +26,25 @@ class AttributeAnnotationSpec extends AnyFlatSpec with Matchers {
     verilog should include("(* synthesis translate_off *)")
   }
 
+  it should "generate corresponding SystemVerilog attributes for module" in {
+    class foo extends RawModule {
+      val io = IO(Output(UInt(8.W)))
+      io := 0.U
+      dontTouch(io)
+    }
+    class bar extends RawModule {
+      val io = IO(Output(UInt(8.W)))
+
+      val foo = Module(new foo)
+
+      io := foo.io
+      dontTouch(foo.io)
+
+      addAttribute(foo, """keep_hierachy = "yes"""")
+    }
+    val verilog = ChiselStage.emitSystemVerilog(new bar)
+
+    verilog should include("""(* keep_hierachy = "yes" *)""")
+  }
+
 }

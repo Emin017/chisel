@@ -2,10 +2,8 @@
 package chisel3.util
 
 import firrtl.AttributeAnnotation
-import firrtl.annotations.Named
-
 import chisel3.Data
-import chisel3.experimental.{annotate, requireIsAnnotatable}
+import chisel3.experimental.{annotate, requireIsAnnotatable, BaseModule}
 
 /** Helper Object for applying Attribute Annotations */
 object addAttribute {
@@ -35,6 +33,9 @@ object addAttribute {
     * @param annoString attribute string to add to target.
     */
   def apply(target: Data, annoString: String): Unit = {
+    annotate(target)(Seq(AttributeAnnotation(target.toNamed, annoString)))
+  }
+  def apply(target: BaseModule, annoString: String): Unit = {
     annotate(target)(Seq(AttributeAnnotation(target.toNamed, annoString)))
   }
 }
